@@ -54,6 +54,5 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
-        run: ls
         run:
-          ssh -i <(echo "$SSH_PRIVATE_KEY")  -o StrictHostKeyChecking=no $REMOTE_USER@$REMOTE_HOST 'sudo bash -s' < /home/ubuntu/ci-cd-github-actions-lamp/deploy/deploy.sh
+          ls && ssh -i <(echo "$SSH_PRIVATE_KEY")  -o StrictHostKeyChecking=no $REMOTE_USER@$REMOTE_HOST 'sudo bash -s' < /home/ubuntu/ci-cd-github-actions-lamp/deploy/deploy.sh
