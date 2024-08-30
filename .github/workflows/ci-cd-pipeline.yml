@@ -43,16 +43,16 @@ jobs:
         run: phpunit --configuration phpunit.xml
   
   deploy:
-    - name: Deploy to server
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout Code 
-          uses: actions/checkout@v3
-        
-        - name: Deploy Via SSH
-          env: 
-            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-            REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-            REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          run:
-            ssh -i <(echo "$SSH_PRIVATE_KEY")  -o StrictHostKeyChecking=no $REMOTE_USER@$REMOTE_HOST 'sudo bash -s' < /home/ubuntu/ci-cd-github-actions-lamp/deploy/deploy.sh
+    name: Deploy to server
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code 
+        uses: actions/checkout@v3
+      
+      - name: Deploy Via SSH
+        env: 
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+        run:
+          ssh -i <(echo "$SSH_PRIVATE_KEY")  -o StrictHostKeyChecking=no $REMOTE_USER@$REMOTE_HOST 'sudo bash -s' < /home/ubuntu/ci-cd-github-actions-lamp/deploy/deploy.sh
